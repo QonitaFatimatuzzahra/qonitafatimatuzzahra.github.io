@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio — Qonita Fatimatuzzahra</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      /* =========================================
+       1. VARIABLES & THEME SETUP
+       ========================================= */
+      :root {
+        /* --- DARK MODE (DEFAULT) --- */
+        --bg-1: #050505;
+        --bg-2: #15001a;
+        --neon: #ff009d; /* Pink Neon Utama */
+        --neon-sec: #00f2ff; /* Cyan Accent */
+        --muted: #d8a8c9; /* Teks pudar */
+        --text-main: #fff;
+        --card-bg: rgba(255, 0, 157, 0.03);
+        --card-border: rgba(255, 0, 157, 0.2);
+        --shadow: 0 0 20px rgba(255, 0, 157, 0.15);
+        --nav-bg: rgba(5, 5, 5, 0.7);
+      }
+
+      /* --- LIGHT MODE --- */
+      .light-mode {
+        --bg-1: #f8f9fa;
+        --bg-2: #ffffff;
+        --neon: #c40076; /* Pink lebih tua agar terbaca di putih */
+        --neon-sec: #008c94;
+        --muted: #6c757d;
+        --text-main: #212529;
+        --card-bg: rgba(255, 255, 255, 0.8);
+        --card-border: rgba(196, 0, 118, 0.15);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --nav-bg: rgba(255, 255, 255, 0.85);
+      }
+
+      body {
+        background: radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 0, 157, 0.08),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 85% 85%,
+            rgba(0, 242, 255, 0.08),
+            transparent 40%
+          ),
+          linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        color: var(--text-main);
+        font-family: "Poppins", sans-serif;
+        padding-top: 80px; /* Space for fixed navbar */
+        overflow-x: hidden;
+        transition: background 0.5s ease, color 0.3s ease;
+      }
+
+      /* =========================================
+       2. TYPOGRAPHY & NAVBAR
+       ========================================= */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: var(--neon);
+        transition: color 0.3s;
+      }
+      p {
+        color: var(--text-main);
+      }
+      .text-muted-custom {
+        color: var(--muted) !important;
+        transition: color 0.3s;
+      }
+
+      .navbar {
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--card-border);
+        transition: all 0.3s ease;
+      }
+      .navbar-brand {
+        color: var(--neon) !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-shadow: 0 0 10px rgba(255, 0, 157, 0.25);
+      }
+      .nav-link {
+        color: var(--text-main) !important;
+        margin-left: 15px;
+        font-weight: 500;
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--neon);
+        transition: width 0.3s;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .nav-link:hover {
+        color: var(--neon) !important;
+      }
+
+      /* =========================================
+       3. SECTION TITLES (CENTERED)
+       ========================================= */
+      .section {
+        padding: 80px 0;
+        position: relative;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 50px;
+        color: var(--neon);
+        text-align: center; /* Rata tengah */
+        display: block;
+        width: 100%;
+        position: relative;
+      }
+
+      /* Garis bawah di tengah */
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--neon);
+        margin: 15px auto 0; /* Auto margin kiri-kanan */
+        border-radius: 2px;
+        box-shadow: 0 0 10px var(--neon);
+      }
+
+      /* =========================================
+       4. HERO SECTION (FIXED FRAME)
+       ========================================= */
+      .hero-wrapper {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto; /* Center wrapper */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Lingkaran Utama */
+      .hero-circle {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--card-bg), transparent);
+        border: 2px solid var(--card-border);
+        box-shadow: var(--shadow);
+        overflow: hidden; /* PENTING: Memotong foto agar tidak keluar */
+        z-index: 2;
+        animation: pulseGlow 4s infinite alternate;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Foto di dalam lingkaran */
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Foto menyesuaikan lingkaran */
+        transition: transform 0.5s ease;
+      }
+
+      /* Efek Hover Foto */
+      .hero-wrapper:hover .hero-img {
+        transform: scale(1.1); /* Zoom in sedikit saat hover */
+      }
+
+      /* Cincin Putus-putus Berputar (di luar lingkaran foto) */
+      .hero-wrapper::before {
+        content: "";
+        position: absolute;
+        inset: -12px; /* Jarak dari lingkaran utama */
+        border-radius: 50%;
+        border: 2px dashed var(--neon);
+        opacity: 0.5;
+        animation: rotate 20s linear infinite;
+        z-index: 1;
+      }
+
+      /* Typing Effect Cursor */
+      .typing::after {
+        content: "|";
+        margin-left: 5px;
+        color: var(--neon);
+        animation: blink 0.7s infinite;
+      }
+
+      /* =========================================
+       5. CARDS & SKILLS
+       ========================================= */
+      .custom-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 24px;
+        height: 100%;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      }
+      .custom-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--neon);
+        box-shadow: 0 10px 30px rgba(255, 0, 157, 0.2);
+      }
+
+      /* Skills Bar */
+      .skill {
+        margin-bottom: 15px;
+      }
+      .skill .label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .bar {
+        height: 6px; /* Lebih tipis */
+        background: rgba(128, 128, 128, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .bar i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: var(--neon);
+        border-radius: 10px;
+        position: relative;
+        transition: width 1.5s ease-out;
+        box-shadow: 0 0 10px var(--neon);
+      }
+
+      /* =========================================
+       6. EXPERIENCE (COMPACT)
+       ========================================= */
+      .experience-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      }
+      .light-mode .experience-item {
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+      }
+      .experience-item:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .experience-icon {
+        font-size: 1.2rem;
+        color: var(--neon);
+        margin-right: 15px;
+        margin-top: 2px;
+        min-width: 25px;
+        text-align: center;
+      }
+      .experience-content h5 {
+        font-size: 1rem;
+        margin-bottom: 2px;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+      .experience-content .small {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 5px;
+        display: block;
+      }
+      .experience-content p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      /* =========================================
+       7. PROJECTS (REFINED)
+       ========================================= */
+      /* --- PROJECT BADGES --- */
+      .badge-custom {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        border-radius: 50px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: inline-block;
+        width: fit-content;
+      }
+
+      /* Style untuk Website (Cyan) */
+      .badge-web {
+        border: 1px solid var(--neon-sec);
+        color: var(--neon-sec);
+        background: rgba(0, 242, 255, 0.05);
+        box-shadow: 0 0 10px rgba(0, 242, 255, 0.15);
+      }
+
+      /* Style untuk UI/UX (Pink) */
+      .badge-ui {
+        border: 1px solid var(--neon);
+        color: var(--neon);
+        background: rgba(255, 0, 157, 0.05);
+        box-shadow: 0 0 10px rgba(255, 0, 157, 0.15);
+      }
+
+      /* =========================================
+       8. CONTACT & FOOTER
+       ========================================= */
+      .photo-circle-contact {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 2px solid var(--card-border);
+        padding: 5px;
+        background: var(--card-bg);
+        overflow: hidden; /* Foto tetap di dalam */
+        transition: transform 0.3s;
+      }
+      .photo-contact-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .photo-circle-contact:hover {
+        transform: scale(1.05);
+        border-color: var(--neon);
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 1px solid var(--card-border);
+        color: var(--neon);
+        margin-right: 10px;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        background: var(--card-bg);
+      }
+      .social-link:hover {
+        background: var(--neon);
+        color: #fff;
+        transform: translateY(-3px);
+      }
+
+      footer {
+        border-top: 1px solid var(--card-border);
+        padding: 25px 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-top: 50px;
+      }
+
+      /* =========================================
+       9. ANIMATIONS & UTILS
+       ========================================= */
+      /* Background Neon Lines */
+      .neon-lines {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .neon-lines span {
+        position: absolute;
+        width: 2px;
+        height: 80px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--neon-sec),
+          transparent
+        );
+        opacity: 0;
+        animation: fall linear infinite;
+      }
+
+      /* Keyframes */
+      @keyframes rotate {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      @keyframes pulseGlow {
+        from {
+          box-shadow: 0 0 10px var(--card-border);
+        }
+        to {
+          box-shadow: 0 0 20px var(--neon);
+        }
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.4;
+        }
+        90% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+
+      /* Theme Button */
+      .theme-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 9999;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--bg-2);
+        color: var(--neon);
+        border: 2px solid var(--neon);
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 0 15px rgba(255, 0, 157, 0.3);
+      }
+      .theme-btn:hover {
+        transform: scale(1.1) rotate(20deg);
+        background: var(--neon);
+        color: #fff;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-wrapper {
+          width: 240px;
+          height: 240px;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+        .custom-card {
+          padding: 20px;
+        }
+        .photo-circle-contact {
+          width: 160px;
+          height: 160px;
+          margin-top: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="themeToggle" class="theme-btn">
+      <i class="fa fa-moon"></i>
+    </button>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Qonita.</a>
+        <button
+          class="navbar-toggler bg-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav ms-auto nav-links">
+            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#skills">Skills</a>
+            <a class="nav-link" href="#experience">Experience</a>
+            <a class="nav-link" href="#projects">Projects</a>
+            <a class="nav-link" href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section
+      id="home"
+      class="section d-flex align-items-center"
+      style="min-height: 100vh; padding-top: 100px"
+    >
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <div
+            class="col-lg-7 order-2 order-lg-1"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <h1 class="display-4 fw-bold mb-3">
+              Hello, I'm
+              <span style="color: var(--neon)">Qonita Fatimatuzzahra</span>
+            </h1>
+            <p class="lead text-muted-custom mb-4" style="min-height: 60px">
+              <span class="typing"></span>
+            </p>
+            <div class="d-flex gap-3">
+              <a
+                href="#contact"
+                class="btn rounded-pill px-4 py-2"
+                style="
+                  background: var(--neon);
+                  color: white;
+                  border: none;
+                  box-shadow: 0 4px 15px rgba(255, 0, 157, 0.4);
+                "
+                >Contact Me</a
+              >
+              <a
+                href="#projects"
+                class="btn btn-outline-light rounded-pill px-4 py-2"
+                style="color: var(--text-main); border-color: var(--text-main)"
+                >View Work</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="col-lg-5 text-center order-1 order-lg-2"
+            data-aos="zoom-in"
+            data-aos-duration="1200"
+          >
+            <div class="hero-wrapper">
+              <div class="hero-circle">
+                <img
+                  src="qonita_profile.png"
+                  alt="Qonita Profile"
+                  class="hero-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">About Me</h2>
+        <div class="row justify-content-center">
+          <div
+            class="col-md-8 text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="custom-card">
+              <p
+                class="text-muted-custom mb-0"
+                style="font-size: 1.1rem; line-height: 1.8"
+              >
+                Halo! Saya Qonita — mahasiswa Sistem Informasi Universitas
+                Negeri Semarang (UNNES). Saat ini Freelance sebagai
+                <strong>Frontend Developer</strong> di PT Mipcon. Saya memiliki
+                ketertarikan mendalam pada UI/UX, pengembangan web modern, serta
+                memasarkan suatu product. Selain ngoding, saya aktif membuat
+                konten kreatif di TikTok.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Skills</h2>
+        <div class="row g-4">
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="custom-card">
+              <h5><i class="fa fa-code me-2"></i>Frontend & Design</h5>
+              <p class="text-muted-custom small mb-4">
+                Teknologi & tools harian
+              </p>
+
+              <div class="skill">
+                <div class="label"><span>HTML</span><span>80%</span></div>
+                <div class="bar"><i data-width="80%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label">
+                  <span>CSS / Bootstrap</span><span>75%</span>
+                </div>
+                <div class="bar"><i data-width="75%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label"><span>JavaScript</span><span>50%</span></div>
+                <div class="bar"><i data-width="50%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label">
+                  <span>Figma / UI Design</span><span>85%</span>
+                </div>
+                <div class="bar"><i data-width="85%"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="custom-card">
+              <h5><i class="fa fa-brain me-2"></i>Data & Other Skills</h5>
+              <p class="text-muted-custom small mb-4">Analisis & Soft Skills</p>
+
+              <div class="skill">
+                <div class="label">
+                  <span>Python (Data Analysis)</span><span>70%</span>
+                </div>
+                <div class="bar"><i data-width="70%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label">
+                  <span>Time Management</span><span>72%</span>
+                </div>
+                <div class="bar"><i data-width="72%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label">
+                  <span>Content Creation</span><span>85%</span>
+                </div>
+                <div class="bar"><i data-width="85%"></i></div>
+              </div>
+              <div class="skill mt-3">
+                <div class="label">
+                  <span>Team Collaboration</span><span>85%</span>
+                </div>
+                <div class="bar"><i data-width="85%"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Experience</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-9" data-aos="zoom-in-up">
+            <div class="custom-card">
+              <div class="d-flex flex-column gap-4">
+                <div class="experience-item">
+                  <div class="experience-icon">
+                    <i class="fa fa-briefcase"></i>
+                  </div>
+                  <div class="experience-content">
+                    <h5 class="mb-1" style="color: var(--text-main)">
+                      Freelance Frontend Developer
+                    </h5>
+                    <p class="small text-muted-custom mb-1">
+                      PT Mipcon • Present
+                    </p>
+                    <p class="text-muted-custom mb-0">
+                      Mengembangkan antarmuka pengguna yang responsif dan
+                      interaktif menggunakan teknologi web modern.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="experience-item">
+                  <div class="experience-icon">
+                    <i class="fa fa-certificate"></i>
+                  </div>
+                  <div class="experience-content">
+                    <h5 class="mb-1" style="color: var(--text-main)">
+                      Student Intern/PKL
+                    </h5>
+                    <p class="small text-muted-custom mb-1">
+                      Dieng Cyber Software House
+                    </p>
+                    <p class="text-muted-custom mb-0">
+                      Merancang website e-commerce, Mempelajari tentang server,
+                      dan Belajar membuat artikel.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="experience-item">
+                  <div class="experience-icon">
+                    <i class="fa fa-graduation-cap"></i>
+                  </div>
+                  <div class="experience-content">
+                    <h5 class="mb-1" style="color: var(--text-main)">
+                      Sekolah Kepemimpinan
+                    </h5>
+                    <p class="small text-muted-custom mb-1">
+                      BEM FMIPA Universitas Negeri Semarang
+                    </p>
+                    <p class="text-muted-custom mb-0">
+                      Mempelajari tentang Kepemimpinan, Manajemen Waktu,
+                      Organization Skills, dan Public Speaking.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <a
+                  href="https://drive.google.com/file/d/10Vn2iJ9vUCzilW-tZT8xzkylGGNwuOyq/view?usp=sharing"
+                  class="btn btn-sm rounded-pill px-3"
+                  style="border: 1px solid var(--neon); color: var(--neon)"
+                  >Download CV <i class="fa fa-download ms-1"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Projects</h2>
+
+        <div class="row g-4 justify-content-center">
+          <div
+            class="col-lg-4 col-md-6"
+            data-aos="flip-left"
+            data-aos-delay="0"
+          >
+            <div class="custom-card h-100 d-flex flex-column project-card">
+              <div class="project-icon-wrapper">
+                <i class="fa fa-leaf"></i>
+              </div>
+              <small
+                style="
+                  color: var(--neon-sec);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 5px;
+                  display: block;
+                "
+                >Website Development</small
+              >
+              <h5>GreenBin</h5>
+              <p class="text-muted-custom small flex-grow-1">
+                Aplikasi web pengelolaan sampah berbasis AI untuk klasifikasi
+                otomatis dan pelacakan dampak lingkungan.
+              </p>
+              <div class="mt-auto d-flex gap-2">
+                <a
+                  href="https://github.com/QonitaFatimatuzzahra/Greenbin.git"
+                  class="btn btn-sm w-100"
+                  style="
+                    background: var(--neon-sec);
+                    color: #000;
+                    border: none;
+                    font-weight: 600;
+                  "
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6"
+            data-aos="flip-left"
+            data-aos-delay="100"
+          >
+            <div class="custom-card h-100 d-flex flex-column project-card">
+              <div class="project-icon-wrapper">
+                <i class="fa fa-book-open"></i>
+              </div>
+              <small
+                style="
+                  color: var(--neon-sec);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 5px;
+                  display: block;
+                "
+                >Website Development</small
+              >
+              <h5>Sbook</h5>
+              <p class="text-muted-custom small flex-grow-1">
+                Platform baca komik/manhwa online dengan navigasi scroll
+                vertikal ala Webtoon yang responsif.
+              </p>
+              <div class="mt-auto d-flex gap-2">
+                <a
+                  href="https://github.com/QonitaFatimatuzzahra/sbook.git"
+                  class="btn btn-sm w-100"
+                  style="
+                    background: var(--neon-sec);
+                    color: #000;
+                    border: none;
+                    font-weight: 600;
+                  "
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6"
+            data-aos="flip-left"
+            data-aos-delay="200"
+          >
+            <div class="custom-card h-100 d-flex flex-column project-card">
+              <div class="project-icon-wrapper">
+                <i class="fa fa-mug-hot"></i>
+              </div>
+              <small
+                style="
+                  color: var(--neon-sec);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 5px;
+                  display: block;
+                "
+                >Website Development</small
+              >
+              <h5>KopiKenangan</h5>
+              <p class="text-muted-custom small flex-grow-1">
+                Sistem Informasi Profil Kedai Kopi yang estetis untuk promosi
+                digital dan informasi menu.
+              </p>
+              <div class="mt-auto d-flex gap-2">
+                <a
+                  href="https://github.com/QonitaFatimatuzzahra/webkopi.git"
+                  class="btn btn-sm w-100"
+                  style="
+                    background: var(--neon-sec);
+                    color: #000;
+                    border: none;
+                    font-weight: 600;
+                  "
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-8 col-md-10"
+            data-aos="zoom-in-up"
+            data-aos-delay="300"
+          >
+            <div class="custom-card project-card text-center">
+              <div
+                class="project-icon-wrapper mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="fa fa-layer-group" style="font-size: 2.5rem"></i>
+              </div>
+              <small
+                style="
+                  color: var(--neon);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 5px;
+                  display: block;
+                "
+                >UI/UX Design Portfolio</small
+              >
+
+              <h5 class="mb-3">Desktop & Mobile App Design</h5>
+
+              <p class="text-muted-custom small mb-4">
+                Kumpulan desain antarmuka pengguna (UI) dan pengalaman pengguna
+                (UX) yang telah saya kerjakan. <br />
+                Mencakup studi kasus untuk platform
+                <strong>Desktop</strong> (Shop Smart, UNFEST Ticket, Portal
+                Sekolah) dan <strong>Mobile App</strong> (CINEMA.TIX, AI
+                Skincare, Wonosobo Culinary).
+              </p>
+
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a
+                  href="https://drive.google.com/file/d/1WMEQT-0odPA1YtJ60bFJ7YDGM-uaSdCm/view?usp=sharing"
+                  class="btn px-4 py-2"
+                  style="background: var(--neon); color: white; border: none"
+                >
+                  <i class="fa fa-desktop me-2"></i>Lihat Portofolio Desktop
+                </a>
+                <a
+                  href="https://drive.google.com/file/d/1j8zyeUa5YoNW8IzP1iqCqgpoVBWdSjSy/view?usp=sharing"
+                  class="btn btn-outline-light px-4 py-2"
+                  style="border-color: var(--neon); color: var(--neon)"
+                >
+                  <i class="fa fa-mobile-screen me-2"></i>Lihat Portofolio
+                  Mobile
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
+        <div class="row align-items-center g-5">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="custom-card">
+              <h4 class="mb-4">Let's Connect!</h4>
+              <p class="mb-2"><strong>Email:</strong></p>
+              <p class="text-muted-custom mb-4">
+                <a
+                  href="mailto:qonitafatimatuzzahrawork@gmail.com"
+                  style="
+                    color: var(--neon);
+                    text-decoration: none;
+                    font-weight: 600;
+                  "
+                  >qonitafatimatuzzahrawork@gmail.com</a
+                >
+              </p>
+
+              <p class="mb-3"><strong>Follow Me:</strong></p>
+              <div class="d-flex">
+                <a
+                  href="https://www.instagram.com/nitazzhraaa?igsh=MW9uemVka2dsbmV2aQ%3D%3D&utm_source=qr"
+                  class="social-link"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a
+                  href="https://www.tiktok.com/@qonitafffff?_r=1&_t=ZS-91dQbA5Uyuq"
+                  class="social-link"
+                  ><i class="fab fa-tiktok"></i
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/qonita-fatimatuzzahra-79212724a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  class="social-link"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a
+                  href="https://github.com/QonitaFatimatuzzahra"
+                  class="social-link"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+              <p
+                class="mt-4 small text-muted-custom border-top pt-3"
+                style="border-color: var(--card-border) !important"
+              >
+                Open for collaboration, freelance projects, ui/ux design, and
+                frontend developer roles.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 text-center" data-aos="fade-left">
+            <div class="photo-circle-contact">
+              <img
+                src="qonita_profile.png"
+                alt="Qonita Contact"
+                class="photo-contact-img"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center">
+      <div class="container">
+        <small
+          >© 2024 <strong>Qonita Fatimatuzzahra</strong>. Universitas Negeri
+          Semarang</small
+        >
+      </div>
+    </footer>
+
+    <div class="neon-lines" id="neonLines"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      // 1. INIT AOS
+      AOS.init({
+        once: true,
+        offset: 100,
+        duration: 800,
+        easing: "ease-out-cubic",
+      });
+
+      // 2. THEME TOGGLE
+      const btn = document.getElementById("themeToggle");
+      btn.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        let icon = btn.querySelector("i");
+        if (document.body.classList.contains("light-mode")) {
+          icon.classList.replace("fa-moon", "fa-sun");
+          document.querySelector(".navbar").classList.remove("navbar-dark");
+          document.querySelector(".navbar").classList.add("navbar-light");
+        } else {
+          icon.classList.replace("fa-sun", "fa-moon");
+          document.querySelector(".navbar").classList.remove("navbar-light");
+          document.querySelector(".navbar").classList.add("navbar-dark");
+        }
+      });
+
+      // 3. SKILL BAR ANIMATION
+      function animateSkillBars() {
+        const bars = document.querySelectorAll(".bar i");
+        bars.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+            const w = el.getAttribute("data-width");
+            el.style.width = w;
+          }
+        });
+      }
+      window.addEventListener("scroll", animateSkillBars);
+
+      // 4. TYPING EFFECT
+      const textElement = document.querySelector(".typing");
+      const words = [
+        "Mahasiswa Sistem Informasi.",
+        "Frontend Developer.",
+        "UI/UX Enthusiast.",
+        "Content Creator.",
+      ];
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function type() {
+        const currentWord = words[wordIndex];
+        if (isDeleting) {
+          textElement.textContent = currentWord.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          textElement.textContent = currentWord.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(type, 2000);
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(type, 500);
+        } else {
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
+      }
+      type();
+
+      // 5. GENERATE NEON LINES (CSS Generated via JS for randomness)
+      function createNeonLines() {
+        const container = document.getElementById("neonLines");
+        const count = 15;
+        for (let i = 0; i < count; i++) {
+          const span = document.createElement("span");
+          span.style.left = Math.random() * 100 + "%";
+          span.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
+          span.style.animationDelay = Math.random() * 5 + "s";
+          container.appendChild(span);
+        }
+      }
+      createNeonLines();
+    </script>
+  </body>
+</html>
